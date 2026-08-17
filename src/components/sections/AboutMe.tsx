@@ -3,7 +3,7 @@ import meImg from '../../assets/me.jpeg';
 
 export default function AboutMe() {
     return (
-        <section className="flex flex-col items-center gap-6 bg-surface text-text ">
+        <section className="flex flex-col items-center gap-6 text-text ">
             <img
                 src={meImg}
                 alt="Enzo"

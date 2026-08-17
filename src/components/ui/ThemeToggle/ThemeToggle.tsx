@@ -1,6 +1,6 @@
 import useTheme from "./useTheme";
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
     const { isDarkMode, switchTheme } = useTheme();
 
     return (

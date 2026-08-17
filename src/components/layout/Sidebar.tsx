@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { NAV_ITEMS } from "../../config/navigation";
-import ThemeToggle from "../ui/ThemeToggle/ThemeToggle";
+import { ThemeToggle } from "../ui/ThemeToggle/ThemeToggle";
 
 export default function Sidebar() {
     return (

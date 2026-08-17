@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import ThemeToggle from "../ui/ThemeToggle/ThemeToggle";
+import { ThemeToggle } from "../ui/ThemeToggle/ThemeToggle";
 import { NAV_ITEMS } from "../../config/navigation";
 
 export default function Header() {
