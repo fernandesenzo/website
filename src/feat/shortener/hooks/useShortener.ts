@@ -4,7 +4,7 @@ import { createShortLink } from "../api";
 export function useShortener() {
     const [status, setStatus] = useState<'form' | 'fetching' | 'success' | 'failure'>('form');
     const [url, setUrl] = useState("");
-    const [code, setCode] = useState("abcdef");
+    const [code, setCode] = useState("");
 
     const generateLink = async () => {
         setStatus('fetching');

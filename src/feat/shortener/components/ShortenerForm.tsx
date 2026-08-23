@@ -1,4 +1,5 @@
 import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
 
 interface ShortenerFormProps {
     url: string;
@@ -10,13 +11,7 @@ interface ShortenerFormProps {
 export function ShortenerForm({ url, onUrlChange, onSubmit, isSubmitting }: ShortenerFormProps) {
     return (
         <div className="flex flex-col gap-2 items-center">
-            <input
-                value={url}
-                onChange={(e) => onUrlChange(e.target.value)}
-                placeholder="Insert your link"
-                disabled={isSubmitting}
-                className="w-72 px-4 py-2 rounded-lg border border-border  text-text text-center focus:outline-none focus:border-gray-400 placeholder:text-gray-400"
-            />
+            <Input value={url} onChange={onUrlChange} disabled={isSubmitting} placeholder="Enter a URL" />
             <Button onClick={onSubmit} disabled={isSubmitting}>
                 {isSubmitting ? "Generating..." : "Generate"}
             </Button>

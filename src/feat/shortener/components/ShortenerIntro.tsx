@@ -19,6 +19,7 @@ export function ShortenerIntro() {
                 <li>Only well-formed HTTP or HTTPS URLs are accepted.</li>
                 <li>URLs cannot be longer than 200 characters.</li>
                 <li>Links expire automatically after 24 hours.</li>
+                <li>Each IP address can have up to 10 active links.</li>
             </ul>
 
 

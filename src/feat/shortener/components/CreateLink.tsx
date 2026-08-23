@@ -17,11 +17,8 @@ export default function CreateLink() {
             {
                 status === 'failure' && <ShortenerFailure restart={reopenGenerateLink} />
             }
-            <p className="max-w-3xl text-center leading-7">
-                <strong>Notice:</strong> Links may expire before 24 hours.
-                Since they are stored in Redis, they may be evicted if the
-                cache becomes full. Our Redis instance uses an LRU eviction policy.
-            </p>
+
+
         </>
     )
 
