@@ -9,7 +9,7 @@ export function NapkinRedirect() {
             <Input onChange={updateText} value={code} placeholder="Enter a 6 digit code" />
             <div className="flex justify-around gap-6">
                 <Button onClick={onRandomClick}>Generate random </Button>
-                <Button onClick={onNormalClick} disabled={!isInputComplete}>Generate</Button>
+                <Button onClick={onNormalClick} disabled={!isInputComplete}>Enter code</Button>
             </div>
 
         </>

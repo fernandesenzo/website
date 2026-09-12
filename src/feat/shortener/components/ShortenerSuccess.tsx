@@ -1,6 +1,6 @@
 import { Button } from "../../../components/ui/Button";
 
-const DISPLAY_URL = import.meta.env.VITE_SHORTENER_RESPONSE_ALTERNATIVE_URL;
+const DISPLAY_URL: string = import.meta.env.VITE_SHORTENER_RESPONSE_ALTERNATIVE_URL as string;
 
 interface ShortenerSuccessProps {
     code: string;

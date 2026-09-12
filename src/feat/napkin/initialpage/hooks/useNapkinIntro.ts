@@ -26,10 +26,10 @@ export function useNapkinIntro() {
     }
 
     const onRandomClick = () => {
-        navigate(`/napkin/${generateRandomAlphaNum(6)}`);
+        void navigate(`/napkin/${generateRandomAlphaNum(6)}`);
     }
     const onNormalClick = () => {
-        navigate(`/napkin/${code}`);
+        void navigate(`/napkin/${code}`);
     }
 
     return {

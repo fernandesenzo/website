@@ -1,6 +1,6 @@
 interface InputProps {
     value: string
-    onChange: (string) => void;
+    onChange: (val: string) => void;
     disabled?: boolean;
     placeholder: string;
 

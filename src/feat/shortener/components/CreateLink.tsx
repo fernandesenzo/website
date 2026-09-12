@@ -9,7 +9,7 @@ export default function CreateLink() {
     return (
         <>
             {
-                (status === 'form' || status === 'fetching') && <ShortenerForm url={url} onUrlChange={setUrl} onSubmit={generateLink} isSubmitting={isSubmitting} />
+                (status === 'form' || status === 'fetching') && <ShortenerForm url={url} onUrlChange={setUrl} onSubmit={() => void generateLink()} isSubmitting={isSubmitting} />
             }
             {
                 status === 'success' && <ShortenerSuccess code={code} restart={reopenGenerateLink} />

@@ -13,7 +13,7 @@ export function useShortener() {
             setCode(resp.code)
             setStatus('success');
 
-        } catch (error) {
+        } catch {
             setStatus('failure');
         }
     }

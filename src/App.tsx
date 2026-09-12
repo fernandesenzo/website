@@ -5,6 +5,7 @@ import MainLayout from './components/layout/MainLayout';
 const Home = lazy(() => import('./pages/Home'))
 const Napkin = lazy(() => import('./pages/Napkin'))
 const Shortener = lazy(() => import('./pages/Shortener'))
+const NapkinPage = lazy(() => import('./pages/NapkinPage'))
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/napkin" element={<Napkin />} />
             <Route path="/shortener" element={<Shortener />} />
+            <Route path="/napkin/:code" element={<NapkinPage />} />
           </Route>
         </Routes>
       </Suspense>
