@@ -1,0 +1,27 @@
+name: website
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download source
+        uses: actions/checkout@v6
+      - name: Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: "npm"
+      - name: install locked dependencies
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: compile
+        run: npm run build
