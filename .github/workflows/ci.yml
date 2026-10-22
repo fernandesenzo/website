@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  ci:
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - name: Download source
@@ -21,7 +21,54 @@ jobs:
           cache: "npm"
       - name: install locked dependencies
         run: npm ci
+      - name: audit
+        run: npm audit --audit-level=high
       - name: lint
         run: npm run lint
       - name: compile
         run: npm run build
+      - name: Upload static files
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-dist-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+  deploy:
+    needs: ci
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    environment: production
+    permissions:
+      contents: read
+    steps:
+      - name: Download static files
+        uses: actions/download-artifact@v8
+        with:
+          name: website-dist-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/website-dist
+      - name: Get deploy script
+        uses: actions/checkout@v7
+        with:
+          repository: fernandesenzo/infra
+          ref: main
+          path: infra
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ vars.SSH_KNOWN_HOSTS }}
+        run: |
+          : "${SSH_PRIVATE_KEY:?SSH_PRIVATE_KEY is required}"
+          : "${SSH_KNOWN_HOSTS:?SSH_KNOWN_HOSTS is required}"
+
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$HOME/.ssh/id_ed25519"
+          chmod 600 "$HOME/.ssh/id_ed25519"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+      - name: Deploy website
+        env:
+          SSH_TARGET: ${{ vars.SSH_TARGET }}
+          REMOTE_WEBSITE_DIR: ${{ vars.REMOTE_WEBSITE_DIR }}
+          DEPLOY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        run: bash infra/deploy/website.sh "$RUNNER_TEMP/website-dist"
